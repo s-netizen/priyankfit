@@ -1,3 +1,6 @@
+"use client";
+import { useState } from "react";
+
 const credentials = [
   { icon: "🏅", title: "REPs Certified Trainer", sub: "Registered Exercise Professional" },
   { icon: "🎓", title: "Diploma in Personal Training", sub: "Certified & qualified coach" },
@@ -6,83 +9,106 @@ const credentials = [
 ];
 
 const instagramHandles = [
-  {
-    handle: "@pri_yankchaturvedi",
-    url: "https://www.instagram.com/pri_yankchaturvedi",
-    label: "Personal Profile",
-    followers: "Personal Brand",
-  },
-  {
-    handle: "@trainwithpriyank",
-    url: "https://www.instagram.com/trainwithpriyank",
-    label: "Client Transformations",
-    followers: "Team Priyank",
-  },
+  { handle: "@pri_yankchaturvedi", url: "https://www.instagram.com/pri_yankchaturvedi", label: "Personal Profile" },
+  { handle: "@trainwithpriyank", url: "https://www.instagram.com/trainwithpriyank", label: "Client Transformations" },
+];
+
+const floatingPhotos = [
+  { src: "/images/priyank-float-1.jpg", rotate: "-6deg", x: "0%", delay: "0s" },
+  { src: "/images/priyank-float-2.jpg", rotate: "4deg", x: "30%", delay: "1.5s" },
+  { src: "/images/priyank-float-3.jpg", rotate: "-3deg", x: "60%", delay: "3s" },
 ];
 
 export default function About() {
+  const [active, setActive] = useState(1);
+
   return (
     <section id="about" className="py-24 relative overflow-hidden">
       <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, var(--dark) 0%, #0d0808 50%, var(--dark) 100%)" }} />
 
       <div className="max-w-7xl mx-auto px-6 relative">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Image side */}
-          <div className="relative">
-            <div className="absolute -inset-4 rounded-3xl opacity-20"
-              style={{ background: "radial-gradient(circle at center, var(--red), transparent 70%)" }} />
-            <div className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: "4/5" }}>
-              <img
-                src="/images/priyank-about.jpg"
-                alt="Priyank Chaturvedi — Personal Trainer Delhi"
-                className="w-full h-full object-cover object-top"
-              />
-              <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(10,10,10,0.5) 0%, transparent 60%)" }} />
-              <div className="absolute bottom-6 left-6 right-6 px-4 py-3 rounded-xl flex items-center gap-3"
-                style={{ background: "rgba(10,10,10,0.85)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "var(--red)" }}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
-                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-white text-sm font-semibold">REPs Certified Personal Trainer</p>
-                  <p className="text-gray-400 text-xs">10 Years Experience · Delhi & NCR</p>
-                </div>
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
+
+          {/* LEFT — stacked floating photos */}
+          <div className="relative" style={{ height: 560 }}>
+            {floatingPhotos.map((p, i) => (
+              <div
+                key={i}
+                onClick={() => setActive(i)}
+                className="absolute cursor-pointer transition-all duration-500"
+                style={{
+                  width: 260,
+                  left: `${i * 28}%`,
+                  top: `${i * 8}%`,
+                  transform: `rotate(${p.rotate}) scale(${active === i ? 1.08 : 0.95})`,
+                  zIndex: active === i ? 10 : 3 - i,
+                  boxShadow: active === i
+                    ? "0 30px 80px rgba(0,0,0,0.7), 0 0 40px rgba(230,51,41,0.2)"
+                    : "0 10px 30px rgba(0,0,0,0.5)",
+                  borderRadius: 16,
+                  overflow: "hidden",
+                  border: active === i ? "2px solid rgba(230,51,41,0.5)" : "2px solid rgba(255,255,255,0.06)",
+                  animation: `float ${4 + i}s ease-in-out infinite`,
+                  animationDelay: p.delay,
+                }}
+              >
+                <img src={p.src} alt="Priyank Chaturvedi" className="w-full h-full object-cover object-top" style={{ height: 340 }} />
+                {active === i && (
+                  <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(10,10,10,0.6) 0%, transparent 50%)" }} />
+                )}
               </div>
+            ))}
+
+            {/* Photo selector dots */}
+            <div className="absolute bottom-0 left-0 flex gap-2">
+              {floatingPhotos.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActive(i)}
+                  className="rounded-full transition-all duration-300"
+                  style={{
+                    width: active === i ? 24 : 8,
+                    height: 8,
+                    background: active === i ? "var(--red)" : "rgba(255,255,255,0.2)",
+                  }}
+                />
+              ))}
             </div>
-            <div className="absolute -top-4 -right-4 card px-5 py-4 text-center float">
-              <p style={{ fontFamily: "var(--font-display)", fontSize: "2.5rem", color: "var(--red)", lineHeight: 1 }}>10+</p>
-              <p className="text-gray-400 text-xs mt-1" style={{ fontFamily: "var(--font-condensed)", letterSpacing: "0.1em", textTransform: "uppercase" }}>Years Exp</p>
+
+            {/* Credential badge */}
+            <div
+              className="absolute px-4 py-3 rounded-xl flex items-center gap-3"
+              style={{ bottom: "8%", right: 0, background: "rgba(10,10,10,0.9)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.08)", maxWidth: 220 }}
+            >
+              <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "var(--red)" }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+              </div>
+              <div>
+                <p className="text-white text-xs font-semibold">REPs Certified Trainer</p>
+                <p className="text-gray-400" style={{ fontSize: "0.65rem" }}>10 Yrs · Delhi & NCR</p>
+              </div>
             </div>
           </div>
 
-          {/* Content side */}
+          {/* RIGHT — content */}
           <div>
             <p className="section-label mb-5">// About The Coach</p>
             <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(3rem, 6vw, 5rem)", lineHeight: 0.9, marginBottom: "1.5rem" }}>
               <span className="text-white block">PRIYANK</span>
               <span style={{ color: "var(--red)" }} className="block">CHATURVEDI</span>
             </h2>
-
             <p className="text-gray-400 mb-4" style={{ fontSize: "1rem", lineHeight: 1.8 }}>
-              With over <span className="text-white font-semibold">10 years of hands-on experience</span> in personal training across Delhi & NCR, I've helped 500+ people achieve the bodies they always wanted — whether it's losing stubborn belly fat, packing on lean muscle, or completely transforming their physique.
+              With over <span className="text-white font-semibold">10 years of hands-on experience</span> in personal training across Delhi & NCR, I've helped 500+ people achieve the bodies they always wanted.
             </p>
-
             <p className="text-gray-400 mb-8" style={{ fontSize: "1rem", lineHeight: 1.8 }}>
-              My approach is simple:{" "}
-              <span className="text-white font-semibold">science-based training + real nutrition + accountability</span>. No shortcuts. No gimmicks. Just consistent, proven methods that work for real people with real lives.
+              My approach is simple: <span className="text-white font-semibold">science-based training + real nutrition + accountability</span>. No shortcuts. No gimmicks. Just consistent, proven methods.
             </p>
-
-            <div className="mb-8 px-6 py-5 rounded-xl"
-              style={{ background: "rgba(230,51,41,0.06)", border: "1px solid rgba(230,51,41,0.15)" }}>
+            <div className="mb-8 px-6 py-5 rounded-xl" style={{ background: "rgba(230,51,41,0.06)", border: "1px solid rgba(230,51,41,0.15)" }}>
               <p className="text-gray-300 italic" style={{ fontSize: "1.05rem", lineHeight: 1.7 }}>
                 "I don't just train bodies. I rebuild confidence, discipline, and lifestyle — one rep at a time."
               </p>
               <p className="text-gray-500 mt-2 text-sm">— Priyank Chaturvedi</p>
             </div>
-
-            {/* Credentials */}
             <div className="grid grid-cols-2 gap-3 mb-6">
               {credentials.map((c, i) => (
                 <div key={i} className="card px-4 py-3 flex items-center gap-3 hover:border-red-900 transition-colors">
@@ -94,22 +120,13 @@ export default function About() {
                 </div>
               ))}
             </div>
-
-            {/* Instagram handles */}
             <div>
-              <p className="text-gray-500 text-xs mb-3" style={{ fontFamily: "var(--font-condensed)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
-                Follow on Instagram
-              </p>
+              <p className="text-gray-500 text-xs mb-3" style={{ fontFamily: "var(--font-condensed)", letterSpacing: "0.1em", textTransform: "uppercase" }}>Follow on Instagram</p>
               <div className="flex flex-col gap-2">
                 {instagramHandles.map((ig, i) => (
-                  <a
-                    key={i}
-                    href={ig.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <a key={i} href={ig.url} target="_blank" rel="noopener noreferrer"
                     className="flex items-center justify-between px-4 py-3 rounded-xl group transition-all duration-200 hover:-translate-y-0.5"
-                    style={{ background: "var(--card)", border: "1px solid var(--border)" }}
-                  >
+                    style={{ background: "var(--card)", border: "1px solid var(--border)" }}>
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 rounded-lg flex items-center justify-center"
                         style={{ background: "linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)" }}>
