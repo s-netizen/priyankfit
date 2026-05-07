@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const credentials = [
   { icon: "🏅", title: "REPs Certified Trainer", sub: "Registered Exercise Professional" },
@@ -13,80 +13,107 @@ const instagramHandles = [
   { handle: "@trainwithpriyank", url: "https://www.instagram.com/trainwithpriyank", label: "Client Transformations" },
 ];
 
-const floatingPhotos = [
-  { src: "/images/priyank-float-1.jpg", rotate: "-6deg", x: "0%", delay: "0s" },
-  { src: "/images/priyank-float-2.jpg", rotate: "4deg", x: "30%", delay: "1.5s" },
-  { src: "/images/priyank-float-3.jpg", rotate: "-3deg", x: "60%", delay: "3s" },
+const photos = [
+  "/images/priyank-float-1.jpg",
+  "/images/priyank-float-2.jpg",
+  "/images/priyank-float-3.jpg",
 ];
 
 export default function About() {
-  const [active, setActive] = useState(1);
+  const [current, setCurrent] = useState(0);
+  const [prev, setPrev] = useState<number | null>(null);
+  const [transitioning, setTransitioning] = useState(false);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      goTo((current + 1) % photos.length);
+    }, 3500);
+    return () => clearInterval(timer);
+  }, [current]);
+
+  const goTo = (idx: number) => {
+    if (idx === current || transitioning) return;
+    setTransitioning(true);
+    setPrev(current);
+    setCurrent(idx);
+    setTimeout(() => { setPrev(null); setTransitioning(false); }, 700);
+  };
 
   return (
     <section id="about" className="py-24 relative overflow-hidden">
       <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, var(--dark) 0%, #0d0808 50%, var(--dark) 100%)" }} />
 
       <div className="max-w-7xl mx-auto px-6 relative">
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
 
-          {/* LEFT — stacked floating photos */}
-          <div className="relative" style={{ height: 560 }}>
-            {floatingPhotos.map((p, i) => (
-              <div
-                key={i}
-                onClick={() => setActive(i)}
-                className="absolute cursor-pointer transition-all duration-500"
-                style={{
-                  width: 260,
-                  left: `${i * 28}%`,
-                  top: `${i * 8}%`,
-                  transform: `rotate(${p.rotate}) scale(${active === i ? 1.08 : 0.95})`,
-                  zIndex: active === i ? 10 : 3 - i,
-                  boxShadow: active === i
-                    ? "0 30px 80px rgba(0,0,0,0.7), 0 0 40px rgba(230,51,41,0.2)"
-                    : "0 10px 30px rgba(0,0,0,0.5)",
-                  borderRadius: 16,
-                  overflow: "hidden",
-                  border: active === i ? "2px solid rgba(230,51,41,0.5)" : "2px solid rgba(255,255,255,0.06)",
-                  animation: `float ${4 + i}s ease-in-out infinite`,
-                  animationDelay: p.delay,
-                }}
-              >
-                <img src={p.src} alt="Priyank Chaturvedi" className="w-full h-full object-cover object-top" style={{ height: 340 }} />
-                {active === i && (
-                  <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(10,10,10,0.6) 0%, transparent 50%)" }} />
-                )}
-              </div>
-            ))}
+          {/* LEFT — auto slider */}
+          <div className="relative" style={{ maxWidth: 440 }}>
+            {/* Glow */}
+            <div className="absolute -inset-4 rounded-3xl opacity-20 pointer-events-none"
+              style={{ background: "radial-gradient(circle at center, var(--red), transparent 70%)" }} />
 
-            {/* Photo selector dots */}
-            <div className="absolute bottom-0 left-0 flex gap-2">
-              {floatingPhotos.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActive(i)}
-                  className="rounded-full transition-all duration-300"
+            {/* Slider frame */}
+            <div className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: "4/5" }}>
+              {/* Previous photo fading out */}
+              {prev !== null && (
+                <img
+                  key={`prev-${prev}`}
+                  src={photos[prev]}
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover object-top"
+                  style={{ opacity: 0, transition: "opacity 0.7s ease" }}
+                />
+              )}
+              {/* Current photo fading in */}
+              {photos.map((src, i) => (
+                <img
+                  key={`photo-${i}`}
+                  src={src}
+                  alt="Priyank Chaturvedi"
+                  className="absolute inset-0 w-full h-full object-cover object-top"
                   style={{
-                    width: active === i ? 24 : 8,
-                    height: 8,
-                    background: active === i ? "var(--red)" : "rgba(255,255,255,0.2)",
+                    opacity: i === current ? 1 : 0,
+                    transition: "opacity 0.7s ease",
+                    zIndex: i === current ? 2 : 1,
                   }}
                 />
               ))}
+
+              {/* Bottom gradient */}
+              <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to top, rgba(10,10,10,0.7) 0%, transparent 50%)", zIndex: 3 }} />
+
+              {/* Dots */}
+              <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2" style={{ zIndex: 4 }}>
+                {photos.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => goTo(i)}
+                    className="rounded-full transition-all duration-300"
+                    style={{
+                      width: i === current ? 28 : 8,
+                      height: 8,
+                      background: i === current ? "var(--red)" : "rgba(255,255,255,0.4)",
+                    }}
+                  />
+                ))}
+              </div>
+
+              {/* Credential badge */}
+              <div className="absolute bottom-16 left-4 right-4 px-4 py-3 rounded-xl flex items-center gap-3" style={{ zIndex: 4, background: "rgba(10,10,10,0.85)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "var(--red)" }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+                </div>
+                <div>
+                  <p className="text-white text-sm font-semibold">REPs Certified Personal Trainer</p>
+                  <p className="text-gray-400" style={{ fontSize: "0.65rem" }}>10 Years Experience · Delhi & NCR</p>
+                </div>
+              </div>
             </div>
 
-            {/* Credential badge */}
-            <div
-              className="absolute px-4 py-3 rounded-xl flex items-center gap-3"
-              style={{ bottom: "8%", right: 0, background: "rgba(10,10,10,0.9)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.08)", maxWidth: 220 }}
-            >
-              <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "var(--red)" }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
-              </div>
-              <div>
-                <p className="text-white text-xs font-semibold">REPs Certified Trainer</p>
-                <p className="text-gray-400" style={{ fontSize: "0.65rem" }}>10 Yrs · Delhi & NCR</p>
-              </div>
+            {/* Floating exp badge */}
+            <div className="absolute -top-4 -right-4 card px-5 py-4 text-center float" style={{ zIndex: 5 }}>
+              <p style={{ fontFamily: "var(--font-display)", fontSize: "2.5rem", color: "var(--red)", lineHeight: 1 }}>10+</p>
+              <p className="text-gray-400 text-xs mt-1" style={{ fontFamily: "var(--font-condensed)", letterSpacing: "0.1em", textTransform: "uppercase" }}>Years Exp</p>
             </div>
           </div>
 
