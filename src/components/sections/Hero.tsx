@@ -94,7 +94,7 @@ export default function Hero() {
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.4) 30%, rgba(10,10,10,0.75) 65%, rgba(10,10,10,0.98) 100%)",
+            background: "linear-gradient(180deg, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.2) 25%, rgba(10,10,10,0.55) 60%, rgba(10,10,10,0.92) 100%)",
           }}
         />
         {/* Red tint at top */}
