@@ -229,6 +229,7 @@ export default function Hero() {
             </div>
           </div>
         </div>
+        </div>{/* end desktop flex */}
 
         {/* Stats bar */}
         <div
