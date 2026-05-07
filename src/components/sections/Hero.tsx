@@ -90,18 +90,15 @@ export default function Hero() {
           className="w-full h-full object-cover"
           style={{ objectPosition: "center top" }}
         />
-        {/* Strong gradient so text is readable */}
+        {/* Very light top, heavy bottom — face visible, text readable */}
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(180deg, rgba(10,10,10,0.15) 0%, rgba(10,10,10,0.1) 25%, rgba(10,10,10,0.45) 60%, rgba(10,10,10,0.88) 100%)",
+            background: "linear-gradient(180deg, rgba(5,5,15,0.05) 0%, rgba(5,5,15,0.02) 20%, rgba(5,5,15,0.55) 58%, rgba(5,5,15,0.97) 82%, #05050f 100%)",
           }}
         />
-        {/* Red tint at top */}
-        <div
-          className="absolute inset-0"
-          style={{ background: "radial-gradient(ellipse at 80% 20%, rgba(230,51,41,0.15) 0%, transparent 60%)" }}
-        />
+        {/* Cool blue tint to neutralise warm photo reds so UI red pops */}
+        <div className="absolute inset-0" style={{ background: "rgba(8,12,28,0.22)" }} />
         <div className="absolute inset-0 grid-texture opacity-10" />
       </div>
 
