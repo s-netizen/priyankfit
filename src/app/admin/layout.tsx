@@ -1,19 +1,3 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import { redirect } from "next/navigation";
-
-export default async function AdminLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const session = await getServerSession(authOptions);
-
-  // Allow access to login page without session
-  // Protection happens at API level too
-  if (!session) {
-    redirect("/admin/login");
-  }
-
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }

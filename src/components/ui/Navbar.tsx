@@ -66,7 +66,7 @@ export default function Navbar() {
         {/* CTA */}
         <div className="hidden md:flex items-center gap-3">
           <a
-            href="tel:+919999999999"
+            href="tel:+91918171064366"
             className="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-1"
             style={{ fontFamily: "var(--font-condensed)", letterSpacing: "0.05em" }}
           >

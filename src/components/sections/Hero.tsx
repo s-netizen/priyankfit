@@ -126,7 +126,7 @@ export default function Hero() {
                 Book Free Trial Session
               </a>
               <a
-                href="https://wa.me/919999999999"
+                href="https://wa.me/91918171064366"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-secondary"

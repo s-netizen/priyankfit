@@ -28,7 +28,7 @@ export default function Footer() {
           {/* CTA buttons */}
           <div className="flex flex-wrap justify-center gap-3">
             <a
-              href="https://wa.me/919999999999"
+              href="https://wa.me/91918171064366"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-secondary text-sm"
@@ -40,14 +40,14 @@ export default function Footer() {
               WhatsApp Priyank
             </a>
             <a
-              href="tel:+919999999999"
+              href="tel:+91918171064366"
               className="btn-secondary text-sm"
               style={{ padding: "0.6rem 1.25rem" }}
             >
               <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
               </svg>
-              Call: +91 99999 99999
+              Call: +91 81710 64366
             </a>
           </div>
 
