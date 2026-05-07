@@ -178,7 +178,7 @@ export default function Hero() {
               style={{ aspectRatio: "3/4", maxHeight: 580 }}
             >
               <img
-                src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&h=800&fit=crop"
+                src="/images/priyank-hero-1.jpg"
                 alt="Personal trainer"
                 className="w-full h-full object-cover"
               />

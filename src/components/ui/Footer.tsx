@@ -74,8 +74,8 @@ export default function Footer() {
               © 2026 PriyankFit. All rights reserved. · Laxmi Nagar, Delhi, India
             </p>
             <div className="flex gap-4">
-              <a href="#" className="text-gray-600 hover:text-gray-400 text-xs transition-colors">Privacy Policy</a>
-              <a href="#" className="text-gray-600 hover:text-gray-400 text-xs transition-colors">Terms</a>
+              <a href="https://www.instagram.com/pri_yankchaturvedi" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-400 text-xs transition-colors">@pri_yankchaturvedi</a>
+              <a href="https://www.instagram.com/trainwithpriyank" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-400 text-xs transition-colors">@trainwithpriyank</a>
             </div>
           </div>
         </div>
