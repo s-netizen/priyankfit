@@ -52,7 +52,7 @@ function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
   return (
     <div
       className="card flex-shrink-0 p-6 mx-3"
-      style={{ width: 360, borderColor: "var(--border)" }}
+      style={{ width: 300, borderColor: "var(--border)" }}
     >
       <StarRating count={t.stars} />
       <p

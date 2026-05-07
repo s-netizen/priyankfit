@@ -71,7 +71,7 @@ export default function Pricing() {
 
       <div className="max-w-7xl mx-auto px-6 relative">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-14 gap-6">
+        <div className="flex flex-col mb-10 gap-6">
           <div>
             <p className="section-label mb-4">// Investment</p>
             <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(3rem, 7vw, 5.5rem)", lineHeight: 0.9 }}>
@@ -82,7 +82,7 @@ export default function Pricing() {
 
           {/* Toggle */}
           <div
-            className="flex items-center gap-1 p-1 rounded-full self-start md:self-auto"
+            className="flex items-center gap-1 p-1 rounded-full self-start"
             style={{ background: "var(--card)", border: "1px solid var(--border)" }}
           >
             <button

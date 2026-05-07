@@ -53,7 +53,7 @@ export default function About() {
               style={{ background: "radial-gradient(circle at center, var(--red), transparent 70%)" }} />
 
             {/* Slider frame */}
-            <div className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: "4/5" }}>
+            <div className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: "3/4", maxHeight: "70vw" }}>
               {/* Previous photo fading out */}
               {prev !== null && (
                 <img

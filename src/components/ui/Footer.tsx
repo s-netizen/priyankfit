@@ -26,7 +26,7 @@ export default function Footer() {
           </p>
 
           {/* CTA buttons */}
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 w-full">
             <a
               href="https://wa.me/91918171064366"
               target="_blank"
@@ -52,7 +52,7 @@ export default function Footer() {
           </div>
 
           {/* Nav links */}
-          <div className="flex flex-wrap justify-center gap-6">
+          <div className="flex flex-wrap justify-center gap-4">
             {["Results", "About", "Services", "Pricing", "Areas"].map((l) => (
               <a
                 key={l}

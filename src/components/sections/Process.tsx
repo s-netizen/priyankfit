@@ -54,7 +54,7 @@ export default function Process() {
         </div>
 
         {/* Steps */}
-        <div className="grid md:grid-cols-4 gap-6 mb-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 mb-14">
           {steps.map((s, i) => (
             <div key={i} className="relative">
               {/* Connector line */}

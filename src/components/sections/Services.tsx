@@ -46,7 +46,7 @@ export default function Services() {
         <div className="mb-16">
           <p className="section-label mb-4">// What I Offer</p>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-            <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(3rem, 7vw, 5.5rem)", lineHeight: 0.9 }}>
+            <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.2rem, 8vw, 5.5rem)", lineHeight: 0.9 }}>
               <span className="text-white block">TRAINING</span>
               <span style={{ color: "var(--red)" }} className="block">SERVICES</span>
             </h2>

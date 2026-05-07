@@ -67,7 +67,7 @@ export default function WhyChooseMe() {
       <div className="max-w-7xl mx-auto px-6 relative">
         <div className="text-center mb-16">
           <p className="section-label justify-center mb-4">// Why Choose Me</p>
-          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(3rem, 7vw, 5.5rem)", lineHeight: 0.95 }}>
+          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.2rem, 8vw, 5.5rem)", lineHeight: 0.95 }}>
             <span className="text-white">WHAT MAKES ME </span>
             <span style={{ color: "var(--red)" }}>DIFFERENT</span>
           </h2>

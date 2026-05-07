@@ -105,7 +105,7 @@ export default function Navbar() {
       {/* Mobile menu */}
       {menuOpen && (
         <div
-          className="md:hidden px-6 pb-6 space-y-4"
+          className="md:hidden px-6 pb-6 space-y-4 overflow-y-auto max-h-screen"
           style={{ background: "rgba(10,10,10,0.98)" }}
         >
           {links.map((l) => (

@@ -44,6 +44,11 @@ body {
 ::-webkit-scrollbar-thumb { background: var(--red); border-radius: 2px; }
 
 /* Noise texture overlay */
+/* Prevent horizontal scroll on all elements */
+* {
+  max-width: 100%;
+}
+
 body::before {
   content: '';
   position: fixed;
