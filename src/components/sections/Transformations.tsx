@@ -97,7 +97,7 @@ export default function Transformations() {
           className="flex gap-5 px-5"
           style={{
             width: "max-content",
-            animation: "marquee 25s linear infinite",
+            animation: "marquee 15s linear infinite",
             animationPlayState: paused ? "paused" : "running",
           }}
         >
